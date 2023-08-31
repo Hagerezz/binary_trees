@@ -3,7 +3,7 @@
 /**
  * binary_tree_preorder - preorder the tree
  * @tree: the tree
- * @(*func)(int): the function
+ * @func: the function
 */
 
 void binary_tree_preorder(const binary_tree_t *tree, void (*func)(int))
