@@ -4,16 +4,17 @@
  * binary_tree_uncle - returns a binary tree
  * @node: the node
  * Return: the uncle
-*/
+ */
 
 binary_tree_t *binary_tree_uncle(binary_tree_t *node)
 {
-    binary_tree_t *father = node->parent;
-
-    if (node == NULL || father == NULL)
+    if (node == NULL || node->parent == NULL || node->parent->parent == NULL)
         return (NULL);
-    if (father == father->parent->left)
-        return (father->parent->right);
+
+    binary_tree_t *grandparent = node->parent->parent;
+
+    if (node->parent == grandparent->left)
+        return (grandparent->right);
     else
-        return (father->parent->left);
+        return (grandparent->left);
 }
