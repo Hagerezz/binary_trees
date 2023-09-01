@@ -1,21 +1,16 @@
 #include "binary_trees.h"
 
 /**
- * binary_tree_heightttt - height of a binary tree
+ * binary_tree_depthh - height of a binary tree
  * @tree: a binary tree
  * Return: the height of the binary tree
 */
 
-size_t binary_tree_heightttt(const binary_tree_t *tree)
+size_t binary_tree_depthh(const binary_tree_t *tree)
 {
-	size_t left_height;
-	size_t right_height;
-
-	if (tree == NULL || (tree->left == NULL && tree->right == NULL))
+	if (tree == NULL || tree->parent == NULL)
 		return (0);
-	left_height = binary_tree_heightttt(tree->left);
-	right_height = binary_tree_heightttt(tree->right);
-	return (1 + (left_height > right_height ? left_height : right_height));
+	return (1 + binary_tree_depthh(tree->parent));
 }
 
 /**
@@ -33,11 +28,11 @@ binary_tree_t *binary_trees_ancestor(const binary_tree_t *first, const binary_tr
         return (first->parent);
     if (first->parent == second)
         return (first->parent);
-    if (binary_tree_heightttt(first) == binary_tree_heightttt(second))
+    if (binary_tree_depthh(first) == binary_tree_depthh(second))
         return (binary_trees_ancestor(first->parent, second->parent));
-    if (binary_tree_heightttt(first) > binary_tree_heightttt(second))
+    if (binary_tree_depthh(first) > binary_tree_depthh(second))
         return (binary_trees_ancestor(first, second->parent));
-    if (binary_tree_heightttt(first) < binary_tree_heightttt(second))
+    if (binary_tree_depthh(first) < binary_tree_depthh(second))
         return (binary_trees_ancestor(first->parent, second));
     return (NULL);
 }
